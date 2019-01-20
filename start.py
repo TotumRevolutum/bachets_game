@@ -1,10 +1,9 @@
-import pygame
 import sys
 from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtWidgets import QInputDialog, QLabel
-from PyQt5.QtGui import QPixmap, QIcon
-from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap
+from main_part import start_game
 
 
 class Names(QWidget):
@@ -70,7 +69,7 @@ class Names(QWidget):
 
         self.btn = QPushButton('START', self)
         self.btn.move(450, 700)
-        #self.btn.clicked.connect(self.hello)
+        self.btn.clicked.connect(start_game)
         self.show()
 
 
@@ -92,7 +91,6 @@ class Names(QWidget):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    ex = Names()
-    print(ex.first, ex.second)
+    st = Names()
     sys.exit(app.exec_())
 
