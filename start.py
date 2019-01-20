@@ -1,8 +1,9 @@
 import pygame
 import sys
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtWidgets import QInputDialog, QLabel
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt
 
 
@@ -15,15 +16,18 @@ class Names(QWidget):
 
     def initUI(self):
         self.setGeometry(300, 300, 1000, 1000)
-        self.setWindowTitle('Игра Баше')
-
-        self.labelpic = QLabel(self)
-        self.labelpic.setPixmap(QPixmap(self, 'label.png'))
-        self.labelpic.setGeometry(self, 500, 20)
+        self.setWindowIcon(QtGui.QIcon("label.png"))
 
         self.label = QLabel(self)
         self.label.setText("Добро пожаловать в")
         self.label.move(390, 20)
+
+        pic = QPixmap("label.png")
+        lbl_pic = QLabel(self)
+        lbl_pic.setPixmap(pic)
+        lbl_pic.move(530, 14)
+
+        lbl_pic_first = QLabel(self)
 
         self.label2 = QLabel(self)
         self.label2.setText('Представьте, что вы перенеслись во времени на 200 тысяч лет назад и'
@@ -44,21 +48,15 @@ class Names(QWidget):
         self.button_2.clicked.connect(self.run2)
         self.show()
 
-    def load_image(self, file_name):
-        pixmap = QPixmap(file_name)
-
-        self.label = QLabel(self)
-        self.label.setPixmap(pixmap)
-        self.label.resize(pixmap.width(), pixmap.height())
-
-        self.resize(pixmap.width(), pixmap.height())
-
     def run1(self):
-        #self.load_image('woman.png')
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
             self.button_1.setText('')
             self.first = i
+            pic_first = QPixmap("woman.png")
+            self.lbl_pic_first = QLabel(self)
+            self.lbl_pic_first.setPixmap(pic_first)
+            self.lbl_pic_first.move(30, 500)
 
     def run2(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
