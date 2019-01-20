@@ -46,12 +46,12 @@ class Names(QWidget):
         self.label2.move(30, 60)
 
         self.button_1 = QPushButton(self)
-        self.button_1.move(390, 140)
+        self.button_1.move(390, 160)
         self.button_1.setText("Ввести имя первого игрока")
         self.button_1.clicked.connect(self.run1)
 
         self.button_2 = QPushButton(self)
-        self.button_2.move(390, 180)
+        self.button_2.move(390, 200)
         self.button_2.setText("Ввести имя второго игрока")
         self.button_2.clicked.connect(self.run2)
 
@@ -63,7 +63,12 @@ class Names(QWidget):
         self.label_name2.move(540, 380)
         self.label_name2.setText('                ')
 
-        self.btn = QPushButton('Start', self)
+        pic_rock = QPixmap("huge_rock.png")
+        lbl_pic_rock = QLabel(self)
+        lbl_pic_rock.setPixmap(pic_rock)
+        lbl_pic_rock.move(425, 650)
+
+        self.btn = QPushButton('START', self)
         self.btn.move(450, 700)
         #self.btn.clicked.connect(self.hello)
         self.show()
