@@ -77,7 +77,7 @@ class Names(QWidget):
     def run1(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
-            self.button_1.setText('')
+            self.button_1.setText('Ввести имя повторно')
             self.first = i
             self.label_name1.setText(i)
 
@@ -85,7 +85,7 @@ class Names(QWidget):
     def run2(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
-            self.button_2.setText('')
+            self.button_2.setText('Ввести имя повторно')
             self.second = i
             self.label_name2.setText(i)
 
