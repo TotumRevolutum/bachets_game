@@ -11,10 +11,15 @@ class Names(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
-        self.first = ''
-        self.second = ''
+        self.first = 'Первый'
+        self.second = 'Второй'
 
     def initUI(self):
+        fon_pic = QPixmap("sand.jpg")
+        fon = QLabel(self)
+        fon.setPixmap(fon_pic)
+        fon.move(0, 0)
+
         self.setGeometry(300, 300, 1000, 1000)
         self.setWindowIcon(QtGui.QIcon("label.png"))
 
@@ -27,7 +32,10 @@ class Names(QWidget):
         lbl_pic.setPixmap(pic)
         lbl_pic.move(530, 14)
 
+        pic_first = QPixmap("people.png")
         lbl_pic_first = QLabel(self)
+        lbl_pic_first.setPixmap(pic_first)
+        lbl_pic_first.move(100, 300)
 
         self.label2 = QLabel(self)
         self.label2.setText('Представьте, что вы перенеслись во времени на 200 тысяч лет назад и'
@@ -46,23 +54,35 @@ class Names(QWidget):
         self.button_2.move(390, 180)
         self.button_2.setText("Ввести имя второго игрока")
         self.button_2.clicked.connect(self.run2)
+
+        self.label_name1 = QLabel(self)
+        self.label_name1.move(380, 380)
+        self.label_name1.setText('                ')
+
+        self.label_name2 = QLabel(self)
+        self.label_name2.move(540, 380)
+        self.label_name2.setText('                ')
+
+        self.btn = QPushButton('Start', self)
+        self.btn.move(450, 700)
+        #self.btn.clicked.connect(self.hello)
         self.show()
+
 
     def run1(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
             self.button_1.setText('')
             self.first = i
-            pic_first = QPixmap("woman.png")
-            self.lbl_pic_first = QLabel(self)
-            self.lbl_pic_first.setPixmap(pic_first)
-            self.lbl_pic_first.move(30, 500)
+            self.label_name1.setText(i)
+
 
     def run2(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
             self.button_2.setText('')
             self.second = i
+            self.label_name2.setText(i)
 
 
 if __name__ == '__main__':
