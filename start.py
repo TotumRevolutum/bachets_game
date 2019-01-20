@@ -17,8 +17,12 @@ class Names(QWidget):
         self.setGeometry(300, 300, 1000, 1000)
         self.setWindowTitle('Игра Баше')
 
+        self.labelpic = QLabel(self)
+        self.labelpic.setPixmap(QPixmap(self, 'label.png'))
+        self.labelpic.setGeometry(self, 500, 20)
+
         self.label = QLabel(self)
-        self.label.setText("Добро пожаловать в Bache's Game!")
+        self.label.setText("Добро пожаловать в")
         self.label.move(390, 20)
 
         self.label2 = QLabel(self)
@@ -36,7 +40,7 @@ class Names(QWidget):
 
         self.button_2 = QPushButton(self)
         self.button_2.move(390, 180)
-        self.button_2.setText("Ввести имя Второго игрока")
+        self.button_2.setText("Ввести имя второго игрока")
         self.button_2.clicked.connect(self.run2)
         self.show()
 
