@@ -1,5 +1,5 @@
 import sys
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtGui
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtWidgets import QInputDialog, QLabel
 from PyQt5.QtGui import QPixmap
@@ -37,8 +37,8 @@ class Names(QWidget):
         lbl_pic_first.move(100, 300)
 
         self.label2 = QLabel(self)
-        self.label2.setText('Представьте, что вы перенеслись во времени на 200 тысяч лет назад и'
-                            ' единственным развлечением для вас является "перекладывание камешков".\n'
+        self.label2.setText('Представьте, что вы перенеслись во времени на 200 тысяч лет назад и '
+                            'единственным развлечением для вас является "перекладывание камешков".\n'
                             'Перебирать камни одному - скучно, поэтому вы с товарищем решили сыграть в такую игру:\n'
                             'Из кучи камней необходимо поочередно брать от 1 до n камней (n будет задано позднее).\n'
                             'Выиграет тот, кто возьмет последний камень.')
@@ -72,14 +72,12 @@ class Names(QWidget):
         self.btn.clicked.connect(start_game)
         self.show()
 
-
     def run1(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
             self.button_1.setText('Ввести имя повторно')
             self.first = i
             self.label_name1.setText(i)
-
 
     def run2(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
@@ -93,4 +91,3 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     st = Names()
     sys.exit(app.exec_())
-
