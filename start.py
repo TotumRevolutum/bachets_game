@@ -14,7 +14,7 @@ class Names(QWidget):
         self.second = 'Второй'
 
     def initUI(self):
-        fon_pic = QPixmap("sand.jpg")
+        fon_pic = QPixmap("pictures/sand.jpg")
         fon = QLabel(self)
         fon.setPixmap(fon_pic)
         fon.move(0, 0)
@@ -31,7 +31,7 @@ class Names(QWidget):
         lbl_pic.setPixmap(pic)
         lbl_pic.move(530, 14)
 
-        pic_first = QPixmap("people.png")
+        pic_first = QPixmap("pictures/people.png")
         lbl_pic_first = QLabel(self)
         lbl_pic_first.setPixmap(pic_first)
         lbl_pic_first.move(100, 300)
@@ -62,7 +62,7 @@ class Names(QWidget):
         self.label_name2.move(540, 380)
         self.label_name2.setText('                ')
 
-        pic_rock = QPixmap("huge_rock.png")
+        pic_rock = QPixmap("pictures/huge_rock.png")
         lbl_pic_rock = QLabel(self)
         lbl_pic_rock.setPixmap(pic_rock)
         lbl_pic_rock.move(425, 650)

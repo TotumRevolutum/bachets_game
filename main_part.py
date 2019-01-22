@@ -26,11 +26,11 @@ def start_game():
     screen = pygame.display.set_mode((1000, 1000))
     screen.fill((255, 255, 255))
     running = True
-    bg = Background('cave.png', [0, 0])
+    bg = Background('pictures/cave.png', [0, 0])
 
     mouse_sprites = pygame.sprite.Group()
     mouse = pygame.sprite.Sprite()
-    mouse.image = load_im("knife.png")
+    mouse.image = load_im("pictures/knife.png")
     mouse.rect = mouse.image.get_rect()
     mouse_sprites.add(mouse)
 
@@ -42,7 +42,7 @@ def start_game():
     stones_sp = []
 
     class Stone(pygame.sprite.Sprite):
-        images = load_im("diamond.png")
+        images = load_im("pictures/diamond.png")
 
         def __init__(self, group):
             super().__init__(group)
@@ -58,8 +58,8 @@ def start_game():
         for j in range(0, 3):
             k = - j
             while k != j:
-                stones_sp[i].rect.x = 450 + 64 * (k + j) - 64 * j / 2
-                stones_sp[i].rect.y = 550 - 64 * (3 - j)
+                stones_sp[i].rect.x = 450 + 70 * (k + j) - 64 * j / 2
+                stones_sp[i].rect.y = 550 - 70 * (3 - j)
                 i += 1
                 k += 1
 
