@@ -34,7 +34,8 @@ def start_game():
     mouse.rect = mouse.image.get_rect()
     mouse_sprites.add(mouse)
 
-    numb = random.randint(0, 3)
+    # numb = random.randint(0, 3)
+    numb = 0
     numb_move = random.randint(2, 5)
 
     stones_sprites_group = []
@@ -47,12 +48,20 @@ def start_game():
             super().__init__(group)
             self.image = Stone.images
             self.rect = self.image.get_rect()
-            self.rect.x = random.randint(200, 800)
-            self.rect.y = 100
 
     for i in range(n_stone[numb]):
         stones_sprites_group.append(pygame.sprite.Group())
         stones_sp.append(Stone(stones_sprites_group[i]))
+    if numb == 0:
+        i = 0
+        k = 0
+        for j in range(0, 3):
+            k = - j
+            while k != j:
+                stones_sp[i].rect.x = 450 + 64 * (k + j) - 64 * j / 2
+                stones_sp[i].rect.y = 550 - 64 * (3 - j)
+                i += 1
+                k += 1
 
     pygame.mouse.set_visible(False)
 
