@@ -23,10 +23,12 @@ def load_im(name):
 def start_game():
     pygame.init()
 
-    screen = pygame.display.set_mode((1000, 1000))
+    screen = pygame.display.set_mode((1000, 800))
     screen.fill((255, 255, 255))
     running = True
     bg = Background('pictures/cave.png', [0, 0])
+    #  right = Background('pictures/right.png', [800, 646])
+    #  left = Background('pictures/left.png', [0, 650])
 
     mouse_sprites = pygame.sprite.Group()
     mouse = pygame.sprite.Sprite()
@@ -34,12 +36,23 @@ def start_game():
     mouse.rect = mouse.image.get_rect()
     mouse_sprites.add(mouse)
 
-    # numb = random.randint(0, 3)
-    numb = 0
+    right = pygame.sprite.Sprite()
+    right.image = load_im("pictures/right.png")
+    right.rect = right.image.get_rect()
+
+    left = pygame.sprite.Sprite()
+    left.image = load_im("pictures/left.png")
+    left.rect = left.image.get_rect()
+
+    numb = random.randint(0, 3)
     numb_move = random.randint(2, 5)
 
     stones_sprites_group = []
     stones_sp = []
+
+    ky = 0
+
+    player = 1
 
     class Stone(pygame.sprite.Sprite):
         images = load_im("pictures/diamond.png")
@@ -52,16 +65,37 @@ def start_game():
     for i in range(n_stone[numb]):
         stones_sprites_group.append(pygame.sprite.Group())
         stones_sp.append(Stone(stones_sprites_group[i]))
+
     if numb == 0:
-        i = 0
-        k = 0
-        for j in range(0, 3):
-            k = - j
-            while k != j:
-                stones_sp[i].rect.x = 450 + 70 * (k + j) - 64 * j / 2
-                stones_sp[i].rect.y = 550 - 70 * (3 - j)
-                i += 1
-                k += 1
+        ky = 350
+
+    if numb == 1:
+        ky = 300
+
+    if numb == 2:
+        ky = 200
+
+    if numb == 3:
+        ky = 150
+
+    ki = 0
+    start_x = 450
+    kx = 450
+    a_diamond = 90
+    left_diamond = len(stones_sp)
+    current_d = 1
+    while (1):
+        for i in range(current_d):
+            stones_sp[ki].rect.x = kx
+            stones_sp[ki].rect.y = ky
+            kx += a_diamond
+            ki += 1
+            left_diamond -= 1
+        ky += a_diamond
+        kx = start_x - (a_diamond / 2) * current_d
+        current_d += 1
+        if (current_d > left_diamond):
+            break
 
     pygame.mouse.set_visible(False)
 
@@ -81,6 +115,16 @@ def start_game():
                 for i in range(n_stone[numb]):
                     if stones_sp[i].rect.collidepoint(event.pos):
                         stones_sp[i].kill()
+                        screen.blit(bg.image, bg.rect)
+                        for i in range(n_stone[numb]):
+                            stones_sprites_group[i].draw(screen)
+                        mouse_sprites.draw(screen)
+        if player == 1:
+            screen.blit(left.image, left.rect)
+        else:
+            screen.blit(right.image, right.rect)
+        left.rect.x = 0
+        left.rect.y = 650
         pygame.display.flip()
     pygame.quit()
 
