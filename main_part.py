@@ -1,9 +1,9 @@
 import pygame
-import os
 import random
 import pygame.display
 
 n_stone = [6, 10, 15, 21]
+
 
 class Background(pygame.sprite.Sprite):
     def __init__(self, image_file, location):
@@ -130,27 +130,47 @@ def start_game():
                     mouse_sprites.draw(screen)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                current += 1
-
-                if player == 1:
-                    if current == numb_move:
-                        player = 2
-                        current = 0
-                    curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
-
-                elif player == 2:
-                    if current == numb_move:
-                        player = 1
-                        current = 0
-                    curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
-
                 for i in range(n_stone[numb]):
                     if stones_sp[i].rect.collidepoint(event.pos):
+                        current += 1
+
+                        if player == 1:
+                            if current == numb_move:
+                                player = 2
+                                current = 0
+                            curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+
+                        elif player == 2:
+                            if current == numb_move:
+                                player = 1
+                                current = 0
+                            curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
                         stones_sp[i].kill()
                         screen.blit(bg.image, bg.rect)
+
                         for i in range(n_stone[numb]):
                             stones_sprites_group[i].draw(screen)
                         mouse_sprites.draw(screen)
+
+                if left_tick.rect.collidepoint(event.pos):
+                    player = 2
+                    current = 0
+                    curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+                    screen.blit(bg.image, bg.rect)
+
+                    for i in range(n_stone[numb]):
+                        stones_sprites_group[i].draw(screen)
+                    mouse_sprites.draw(screen)
+
+                elif right_tick.rect.collidepoint(event.pos):
+                    player = 1
+                    current = 0
+                    curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+                    screen.blit(bg.image, bg.rect)
+
+                    for i in range(n_stone[numb]):
+                        stones_sprites_group[i].draw(screen)
+                    mouse_sprites.draw(screen)
 
         if player == 1:
             screen.blit(left.image, left.rect)
@@ -160,7 +180,6 @@ def start_game():
             screen.blit(right.image, right.rect)
             screen.blit(curr_text, (880, 667))
             screen.blit(right_tick.image, right_tick.rect)
+        mouse_sprites.draw(screen)
         pygame.display.flip()
     pygame.quit()
-
-
