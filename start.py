@@ -3,7 +3,7 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtWidgets import QInputDialog, QLabel
 from PyQt5.QtGui import QPixmap
-from main_part import start_game
+from main_part import start_game, names
 
 
 class Names(QWidget):
@@ -77,6 +77,7 @@ class Names(QWidget):
         if okBtnPressed:
             self.button_1.setText('Ввести имя повторно')
             self.first = i
+            names[0] = i
             self.label_name1.setText(i)
 
     def run2(self):
@@ -84,6 +85,7 @@ class Names(QWidget):
         if okBtnPressed:
             self.button_2.setText('Ввести имя повторно')
             self.second = i
+            names[1] = i
             self.label_name2.setText(i)
 
 

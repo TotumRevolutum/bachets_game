@@ -1,8 +1,10 @@
 import pygame
 import random
 import pygame.display
+from ending import end_game
 
 n_stone = [6, 10, 15, 21]
+names = ['Первый', 'Второй']
 
 
 class Background(pygame.sprite.Sprite):
@@ -21,6 +23,8 @@ def load_im(name):
 
 def start_game():
     pygame.init()
+    first = names[0]
+    second = names[1]
 
     screen = pygame.display.set_mode((1000, 800))
     screen.fill((255, 255, 255))
@@ -68,6 +72,7 @@ def start_game():
     ky = 0
     player = 1
     current = 0
+    taken = 0
 
     class Stone(pygame.sprite.Sprite):
         images = load_im("pictures/diamond.png")
@@ -82,7 +87,9 @@ def start_game():
         stones_sp.append(Stone(stones_sprites_group[i]))
 
     pygame.font.init()
-    myfont = pygame.font.SysFont('Extra Cheese Melted', 50)
+    myfont = pygame.font.SysFont('Optima', 50)
+    player_one = myfont.render('Ходит ' + str(first), False, (255, 255, 255))
+    player_two = myfont.render('Ходит ' + str(second), False, (255, 255, 255))
     curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
 
     if numb == 0:
@@ -100,6 +107,7 @@ def start_game():
     a_diamond = 90
     left_diamond = len(stones_sp)
     current_d = 1
+
     while (1):
         for i in range(current_d):
             stones_sp[ki].rect.x = kx
@@ -145,6 +153,7 @@ def start_game():
                                 player = 1
                                 current = 0
                             curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+                        taken += 1
                         stones_sp[i].kill()
                         screen.blit(bg.image, bg.rect)
 
@@ -172,14 +181,19 @@ def start_game():
                         stones_sprites_group[i].draw(screen)
                     mouse_sprites.draw(screen)
 
+        if taken == n_stone[numb]:
+            break
         if player == 1:
+            screen.blit(player_one, (370, 70))
             screen.blit(left.image, left.rect)
             screen.blit(curr_text, (80, 667))
             screen.blit(left_tick.image, left_tick.rect)
         else:
+            screen.blit(player_two, (370, 70))
             screen.blit(right.image, right.rect)
             screen.blit(curr_text, (880, 667))
             screen.blit(right_tick.image, right_tick.rect)
         mouse_sprites.draw(screen)
         pygame.display.flip()
     pygame.quit()
+    end_game(names[player - 1])
