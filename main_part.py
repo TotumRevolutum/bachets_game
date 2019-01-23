@@ -73,6 +73,7 @@ def start_game():
     player = 1
     current = 0
     taken = 0
+    winner = 0
 
     class Stone(pygame.sprite.Sprite):
         images = load_im("pictures/diamond.png")
@@ -87,10 +88,14 @@ def start_game():
         stones_sp.append(Stone(stones_sprites_group[i]))
 
     pygame.font.init()
-    myfont = pygame.font.SysFont('Optima', 50)
+    myfont = pygame.font.Font('Casper.ttf', 50)
     player_one = myfont.render('Ходит ' + str(first), False, (255, 255, 255))
     player_two = myfont.render('Ходит ' + str(second), False, (255, 255, 255))
     curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+    max_stone = pygame.font.Font('Casper.ttf', 20).render('Максимальное количество камней,'
+                                                          ' которое можно взять за ход: '
+                                                          + str(numb_move), False, (255, 255, 255))
+    error = myfont.render('Необходимо взять хотя бы один камень', False, (255, 255, 255))
 
     if numb == 0:
         ky = 350
@@ -141,7 +146,13 @@ def start_game():
                 for i in range(n_stone[numb]):
                     if stones_sp[i].rect.collidepoint(event.pos):
                         current += 1
-
+                        taken += 1
+                        stones_sp[i].kill()
+                        screen.blit(bg.image, bg.rect)
+                        if taken == n_stone[numb]:
+                            winner = player - 1
+                            running = False
+                            break
                         if player == 1:
                             if current == numb_move:
                                 player = 2
@@ -153,47 +164,51 @@ def start_game():
                                 player = 1
                                 current = 0
                             curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
-                        taken += 1
-                        stones_sp[i].kill()
-                        screen.blit(bg.image, bg.rect)
 
                         for i in range(n_stone[numb]):
                             stones_sprites_group[i].draw(screen)
                         mouse_sprites.draw(screen)
 
                 if left_tick.rect.collidepoint(event.pos):
-                    player = 2
-                    current = 0
-                    curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
-                    screen.blit(bg.image, bg.rect)
+                    if current == 0:
+                        screen.blit(error, (170, 70))
+                    else:
+                        player = 2
+                        current = 0
+                        curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+                        screen.blit(bg.image, bg.rect)
 
                     for i in range(n_stone[numb]):
                         stones_sprites_group[i].draw(screen)
                     mouse_sprites.draw(screen)
 
                 elif right_tick.rect.collidepoint(event.pos):
-                    player = 1
-                    current = 0
-                    curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
-                    screen.blit(bg.image, bg.rect)
+                    if current == 0:
+                        screen.blit(error, (170, 70))
+                    else:
+                        player = 1
+                        current = 0
+                        curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
+                        screen.blit(bg.image, bg.rect)
 
                     for i in range(n_stone[numb]):
                         stones_sprites_group[i].draw(screen)
                     mouse_sprites.draw(screen)
 
-        if taken == n_stone[numb]:
-            break
         if player == 1:
-            screen.blit(player_one, (370, 70))
+            screen.blit(player_one, (370, 30))
             screen.blit(left.image, left.rect)
-            screen.blit(curr_text, (80, 667))
+            screen.blit(curr_text, (80, 660))
             screen.blit(left_tick.image, left_tick.rect)
         else:
-            screen.blit(player_two, (370, 70))
+            screen.blit(player_two, (370, 30))
             screen.blit(right.image, right.rect)
-            screen.blit(curr_text, (880, 667))
+            screen.blit(curr_text, (880, 660))
             screen.blit(right_tick.image, right_tick.rect)
+        screen.blit(max_stone, (10, 10))
+        screen.blit(max_stone, (10, 10))
         mouse_sprites.draw(screen)
         pygame.display.flip()
     pygame.quit()
-    end_game(names[player - 1])
+    print(winner)
+    end_game(names[winner])
