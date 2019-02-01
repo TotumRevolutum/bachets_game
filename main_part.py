@@ -89,13 +89,14 @@ def start_game():
 
     pygame.font.init()
     myfont = pygame.font.Font('Casper.ttf', 50)
+    myfont_prev = pygame.font.Font('Casper.ttf', 20)
     player_one = myfont.render('Ходит ' + str(first), False, (255, 255, 255))
     player_two = myfont.render('Ходит ' + str(second), False, (255, 255, 255))
     curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
     max_stone = pygame.font.Font('Casper.ttf', 20).render('Максимальное количество камней,'
                                                           ' которое можно взять за ход: '
                                                           + str(numb_move), False, (255, 255, 255))
-    error = myfont.render('Необходимо взять хотя бы один камень', False, (255, 255, 255))
+    error = myfont_prev.render('Необходимо взять хотя бы один камень', False, (255, 255, 255))
 
     if numb == 0:
         ky = 350
@@ -171,7 +172,7 @@ def start_game():
 
                 if left_tick.rect.collidepoint(event.pos):
                     if current == 0:
-                        screen.blit(error, (170, 70))
+                        screen.blit(error, (320, 90))
                     else:
                         player = 2
                         current = 0
@@ -184,7 +185,7 @@ def start_game():
 
                 elif right_tick.rect.collidepoint(event.pos):
                     if current == 0:
-                        screen.blit(error, (170, 70))
+                        screen.blit(error, (320, 90))
                     else:
                         player = 1
                         current = 0
@@ -196,17 +197,16 @@ def start_game():
                     mouse_sprites.draw(screen)
 
         if player == 1:
-            screen.blit(player_one, (370, 30))
+            screen.blit(player_one, (340, 10))
             screen.blit(left.image, left.rect)
             screen.blit(curr_text, (80, 660))
             screen.blit(left_tick.image, left_tick.rect)
         else:
-            screen.blit(player_two, (370, 30))
+            screen.blit(player_two, (340, 10))
             screen.blit(right.image, right.rect)
             screen.blit(curr_text, (880, 660))
             screen.blit(right_tick.image, right_tick.rect)
-        screen.blit(max_stone, (10, 10))
-        screen.blit(max_stone, (10, 10))
+        screen.blit(max_stone, (180, 60))
         mouse_sprites.draw(screen)
         pygame.display.flip()
     pygame.quit()
