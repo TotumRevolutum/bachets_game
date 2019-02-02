@@ -31,7 +31,6 @@ def end_game(player):
     pygame.font.init()
     myfont = pygame.font.Font('Monly-Light.otf', 100)
     winner = myfont.render('Победитель: ' + str(player), False, (240, 105, 5))
-    speed = 1
     clock = pygame.time.Clock()
     snow_list = []
     while running:
@@ -44,7 +43,7 @@ def end_game(player):
         speed = 1
         y_position += speed
 
-        flake = SnowFlake(2, [x_position, y_position], False)
+        flake = SnowFlake(5, [x_position, y_position], False)
 
         snow_list.append(flake)
 
