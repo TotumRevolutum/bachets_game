@@ -46,21 +46,21 @@ class Names(QWidget):
 
         self.button_1 = QPushButton(self)
         self.button_1.move(390, 160)
-        self.button_1.setText("Ввести имя первого игрока")
+        self.button_1.setText("Играть против друга")
         self.button_1.clicked.connect(self.run1)
 
         self.button_2 = QPushButton(self)
-        self.button_2.move(390, 200)
-        self.button_2.setText("Ввести имя второго игрока")
+        self.button_2.move(370, 200)
+        self.button_2.setText("Играть против компьютера")
         self.button_2.clicked.connect(self.run2)
 
         self.label_name1 = QLabel(self)
         self.label_name1.move(380, 380)
-        self.label_name1.setText('                ')
+        self.label_name1.setText('                                   ')
 
         self.label_name2 = QLabel(self)
         self.label_name2.move(540, 380)
-        self.label_name2.setText('                ')
+        self.label_name2.setText('                                   ')
 
         pic_rock = QPixmap("pictures/huge_rock.png")
         lbl_pic_rock = QLabel(self)
@@ -73,20 +73,27 @@ class Names(QWidget):
         self.show()
 
     def run1(self):
-        i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
+        i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как зовут первого игрока?")
         if okBtnPressed:
-            self.button_1.setText('Ввести имя повторно')
             self.first = i
             names[0] = i
             self.label_name1.setText(i)
+            j, okBtnPressed = QInputDialog.getText(self, "Bache", "Как зовут второго игрока?")
+            if okBtnPressed:
+                self.second = j
+                names[1] = j
+                self.label_name2.setText(j)
 
     def run2(self):
         i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
         if okBtnPressed:
-            self.button_2.setText('Ввести имя повторно')
-            self.second = i
-            names[1] = i
-            self.label_name2.setText(i)
+            self.first = i
+            names[0] = i
+            self.label_name1.setText(i)
+            self.second = "Компьютер"
+            names[1] = "Компьютер"
+            names[2] = 1
+            self.label_name2.setText("Компьютер")
 
 
 if __name__ == '__main__':
