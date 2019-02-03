@@ -91,33 +91,34 @@ def start_game():
     error = myfont_prev.render('Необходимо взять хотя бы один камень', False, (255, 255, 255))
 
     if numb == 0:
-        ky = 350
+        ky = 250
     if numb == 1:
-        ky = 300
-    if numb == 2:
         ky = 200
+    if numb == 2:
+        ky = 100
     if numb == 3:
-        ky = 120
+        ky = 20
 
-    ki = 0
-    start_x = 450
-    kx = 450
+    start_x = 510
+    kx = 510
     a_diamond = 90
-    left_diamond = n_stone[numb]
     current_d = 1
-
-    j = 0
+    current_d_next = 1
     for i in stones_sprites_group:
-        if j == current_d:
-            ky += a_diamond
-            kx = start_x - (a_diamond / 2) * current_d
+        if (current_d < current_d_next):
+            i.rect.x = kx
+            i.rect.y = ky
+            kx += a_diamond
             current_d += 1
-        i.rect.x = kx
-        i.rect.y = ky
-        kx += a_diamond
-        ki += 1
-        left_diamond -= 1
-        j += 1
+        else:
+            current_d_next += 1
+            current_d = 1
+            ky += a_diamond
+            kx = start_x - (a_diamond / 2) * (current_d_next - 1)
+            i.rect.x = kx
+            i.rect.y = ky
+            kx += a_diamond
+            current_d += 1
 
     pygame.mouse.set_visible(False)
 
