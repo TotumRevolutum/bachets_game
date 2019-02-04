@@ -154,7 +154,6 @@ def start_game():
                                     player = 2
                                     current = 0
                                 curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
-
                             elif player == 2:
                                 if current == numb_move:
                                     player = 1
@@ -245,13 +244,16 @@ def start_game():
                         random_st = random.randint(1, numb_move)
                     else:
                         random_st = n_stone[numb] - taken
-                    print(random_st)
                     for i in stones_sprites_group:
                         if random_st == 0:
                             break
                         taken += 1
                         i.kill()
                         random_st -= 1
+                    if taken == n_stone[numb]:
+                        winner = player - 1
+                        running = False
+                        break
                     player = 1
                     current = 0
                 mouse_sprites.draw(screen)
@@ -267,5 +269,4 @@ def start_game():
             mouse_sprites.draw(screen)
             pygame.display.flip()
     pygame.quit()
-    print(winner)
     end_game(names[winner])
