@@ -2,6 +2,7 @@ import pygame
 import random
 import pygame.display
 from ending import end_game
+from question import que
 
 n_stone = [6, 10, 15, 21]
 names = ['Первый', 'Второй', 0]
@@ -181,6 +182,8 @@ def start_game():
                             curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
                             screen.blit(bg.image, bg.rect)
                         mouse_sprites.draw(screen)
+                    elif ques.rect.collidepoint(event.pos):
+                        que()
 
             if player == 1:
                 screen.blit(player_one, (340, 10))
@@ -199,6 +202,7 @@ def start_game():
             pygame.display.flip()
     else:
         random_st = 0
+        ai = myfont_prev.render('Компьютер взял 0 камней', False, (255, 255, 255))
         while running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -244,6 +248,12 @@ def start_game():
                         random_st = random.randint(1, numb_move)
                     else:
                         random_st = n_stone[numb] - taken
+                    if random_st == 1:
+                        ai = myfont_prev.render('Компьютер взял ' + str(random_st) + ' камень', False, (255, 255, 255))
+                    elif random_st == 5:
+                        ai = myfont_prev.render('Компьютер взял ' + str(random_st) + ' камней', False, (255, 255, 255))
+                    else:
+                        ai = myfont_prev.render('Компьютер взял ' + str(random_st) + ' камня', False, (255, 255, 255))
                     for i in stones_sprites_group:
                         if random_st == 0:
                             break
@@ -256,6 +266,7 @@ def start_game():
                         break
                     player = 1
                     current = 0
+
                 mouse_sprites.draw(screen)
 
             if player == 1:
@@ -264,6 +275,7 @@ def start_game():
                 screen.blit(curr_text, (80, 660))
                 screen.blit(left_tick.image, left_tick.rect)
 
+            screen.blit(ai, (400, 750))
             screen.blit(max_stone, (180, 60))
             stones_sprites_group.draw(screen)
             mouse_sprites.draw(screen)

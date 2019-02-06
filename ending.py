@@ -15,7 +15,7 @@ def end_game(player):
     screen_rect = (0, 0, 1000, 800)
 
     class Particle(pygame.sprite.Sprite):
-        fire = [load_image("star.png")]
+        fire = [load_image("pictures/star.png")]
         for scale in (5, 10, 20):
             fire.append(pygame.transform.scale(fire[0], (scale, scale)))
 
