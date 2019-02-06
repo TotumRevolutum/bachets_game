@@ -1,15 +1,48 @@
 import sys
-from PyQt5 import QtGui
+from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import QWidget, QApplication, QPushButton
 from PyQt5.QtWidgets import QInputDialog, QLabel
 from PyQt5.QtGui import QPixmap
 from main_part import start_game, names
 
 
+class SecondWindow(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent, QtCore.Qt.Window)
+        self.build()
+
+    def build(self):
+
+        fon_pic = QPixmap("pictures/svitok.png")
+        fon = QLabel(self)
+        fon.setPixmap(fon_pic)
+        fon.move(0, 0)
+
+        pic = QPixmap("pictures/logogo.png")
+        lbl_pic = QLabel(self)
+        lbl_pic.setPixmap(pic)
+        lbl_pic.move(0, 0)
+
+        self.test = QtWidgets.QLabel(self)
+        pal = self.test.palette()
+        pal.setColor(QtGui.QPalette.WindowText, QtGui.QColor("darkred"))
+        self.test.setPalette(pal)
+        self.test.setText("Баше — математическая игра,\nв которой два игрока"
+                          " по очереди\nвынимают из кучки N предметов.\nЗа один "
+                          "ход можно взять\nне менее 1 и не более k. \n"
+                          "Проигравшим считается тот,\nкому нечего брать.")
+        self.test.setFont(QtGui.QFont("Times", 28))
+        self.test.move(100, 200)
+
+        self.setGeometry(500, 150, 600, 600)
+        self.setWindowIcon(QtGui.QIcon("label.png"))
+
+
 class Names(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
+        self.secondWin = None
         self.first = 'Первый'
         self.second = 'Второй'
 
@@ -37,12 +70,15 @@ class Names(QWidget):
         lbl_pic_first.move(100, 300)
 
         self.label2 = QLabel(self)
-        self.label2.setText('Представьте, что вы перенеслись во времени на 200 тысяч лет назад и '
-                            'единственным развлечением для вас является "перекладывание камешков".\n'
-                            'Перебирать камни одному - скучно, поэтому вы с товарищем решили сыграть в такую игру:\n'
-                            'Из кучи камней необходимо поочередно брать от 1 до n камней (n будет задано позднее).\n'
-                            'Выиграет тот, кто возьмет последний камень.')
+        self.label2.setText('Представьте, что вы перенеслись во '
+                            'времени на 200 тысяч лет назад и '
+                            'единственным развлечением для вас является "перекладывание камешков".\n')
         self.label2.move(30, 60)
+
+        self.button_0 = QPushButton(self)
+        self.button_0.move(412, 120)
+        self.button_0.setText("Правила игры")
+        self.button_0.clicked.connect(self.run0)
 
         self.button_1 = QPushButton(self)
         self.button_1.move(390, 160)
@@ -95,8 +131,14 @@ class Names(QWidget):
             names[2] = 1
             self.label_name2.setText("Компьютер")
 
+    def run0(self):
+        if not self.secondWin:
+            self.secondWin = SecondWindow(self)
+        self.secondWin.show()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     st = Names()
+    st.show()
     sys.exit(app.exec_())

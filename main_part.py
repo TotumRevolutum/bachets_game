@@ -2,7 +2,6 @@ import pygame
 import random
 import pygame.display
 from ending import end_game
-from question import que
 
 n_stone = [6, 10, 15, 21]
 names = ['Первый', 'Второй', 0]
@@ -69,14 +68,18 @@ def start_game():
         stones_sprites_group.add(st)
 
     pygame.font.init()
+
     myfont = pygame.font.Font('Casper.ttf', 50)
     myfont_prev = pygame.font.Font('Casper.ttf', 20)
+
     player_one = myfont.render('Ходит ' + str(first), False, (255, 255, 255))
     player_two = myfont.render('Ходит ' + str(second), False, (255, 255, 255))
+
     curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
     max_stone = pygame.font.Font('Casper.ttf', 20).render('Максимальное количество камней,'
                                                           ' которое можно взять за ход: '
                                                           + str(numb_move), False, (255, 255, 255))
+
     error = myfont_prev.render('Необходимо взять хотя бы один камень', False, (255, 255, 255))
 
     if numb == 0:
@@ -135,6 +138,7 @@ def start_game():
                     if pygame.mouse.get_focused():
                         mouse.rect.x = event.pos[0]
                         mouse.rect.y = event.pos[1]
+
                         screen.blit(bg.image, bg.rect)
                         stones_sprites_group.draw(screen)
                         mouse_sprites.draw(screen)
@@ -182,8 +186,6 @@ def start_game():
                             curr_text = myfont.render('x' + str(current), False, (255, 255, 255))
                             screen.blit(bg.image, bg.rect)
                         mouse_sprites.draw(screen)
-                    elif ques.rect.collidepoint(event.pos):
-                        que()
 
             if player == 1:
                 screen.blit(player_one, (340, 10))

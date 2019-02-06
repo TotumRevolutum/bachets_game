@@ -31,6 +31,7 @@ def end_game(player):
 
         def update(self):
             self.velocity[1] += self.gravity
+
             self.rect.x += self.velocity[0]
             self.rect.y += self.velocity[1]
             if not self.rect.colliderect(screen_rect):
@@ -48,6 +49,7 @@ def end_game(player):
     winner = myfont.render('Победитель: ' + str(player), False, (5, 0, 75))
     clock = pygame.time.Clock()
     all_sprites = pygame.sprite.Group()
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
