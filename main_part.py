@@ -203,7 +203,6 @@ def start_game():
             mouse_sprites.draw(screen)
             pygame.display.flip()
     else:
-        random_st = 0
         ai = myfont_prev.render('Компьютер взял 0 камней', False, (255, 255, 255))
         while running:
             for event in pygame.event.get():

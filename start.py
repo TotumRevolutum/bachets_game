@@ -118,6 +118,7 @@ class Names(QWidget):
             if okBtnPressed:
                 self.second = j
                 names[1] = j
+                names[2] = 0
                 self.label_name2.setText(j)
 
     def run2(self):
