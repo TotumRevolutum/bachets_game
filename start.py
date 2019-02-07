@@ -72,7 +72,8 @@ class Names(QWidget):
         self.label2 = QLabel(self)
         self.label2.setText('Представьте, что вы перенеслись во '
                             'времени на 200 тысяч лет назад и '
-                            'единственным развлечением для вас является "перекладывание камешков".\n')
+                            'единственным развлечением для вас является'
+                            ' "перекладывание камешков".\n')
         self.label2.move(30, 60)
 
         self.button_0 = QPushButton(self)
@@ -109,21 +110,21 @@ class Names(QWidget):
         self.show()
 
     def run1(self):
-        i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как зовут первого игрока?")
-        if okBtnPressed:
+        i, ok_btn_pressed = QInputDialog.getText(self, "Bache", "Как зовут первого игрока?")
+        if ok_btn_pressed:
             self.first = i
             names[0] = i
             self.label_name1.setText(i)
-            j, okBtnPressed = QInputDialog.getText(self, "Bache", "Как зовут второго игрока?")
-            if okBtnPressed:
+            j, ok_btn_pressed = QInputDialog.getText(self, "Bache", "Как зовут второго игрока?")
+            if ok_btn_pressed:
                 self.second = j
                 names[1] = j
                 names[2] = 0
                 self.label_name2.setText(j)
 
     def run2(self):
-        i, okBtnPressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
-        if okBtnPressed:
+        i, ok_btn_pressed = QInputDialog.getText(self, "Bache", "Как тебя зовут?")
+        if ok_btn_pressed:
             self.first = i
             names[0] = i
             self.label_name1.setText(i)
