@@ -60,6 +60,9 @@ def start_game():
     taken = 0
     winner = 0
 
+    pygame.mixer.music.load("intro.ogg")
+    pygame.mixer.music.play(-1)
+
     stones_sprites_group = pygame.sprite.Group()
     for i in range(n_stone[numb]):
         st = pygame.sprite.Sprite()
